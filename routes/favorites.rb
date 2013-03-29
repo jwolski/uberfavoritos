@@ -1,5 +1,7 @@
 class UberFavoritos < Sinatra::Application
   get '/favorites' do
-    json [ { :id => 1, :name => 'Home' } ]
+    favorites = Favorite.all.map { |f| { :id => f.id, :name => f.name } }
+
+    json favorites
   end
 end

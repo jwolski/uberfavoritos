@@ -1,0 +1,23 @@
+Assumptions:
+1) Single user with no user authentication/authorization
+
+2) The concept of a 'favorite' is abstract in the sense that
+some _thing_ has to be favorited. In this exercise, it is a favorite
+location. I chose not to expound/elaborate upon this and keep it simple
+by assuming that the only favorited item will be a location. Had I not
+I probably would have gone with a different URL structure and database
+schema.
+
+3) I did not introduce environment-based configuration (e.g. development vs production)
+
+4) Used integer based migrations numbers instead of timestamp
+
+TODO:
+DONE 1) Get database config into config file
+DONE 2) Create local postgres database
+DONE 3) Define database migration for favorites table (Sequel)
+DONE 4) Create rake task that runs migrations in heroku
+DONE 5) Create Sequel model for Favorite
+6) Add to favorites endpoint GET and POST
+7) See if there's a better way to do idiomatic Sinatra database config (e.g. database.yml... Look at how ideeli did it with DAM)
+8) 404 pages
