@@ -1,8 +1,16 @@
 require 'sinatra'
-require 'sinatra/json'
+require 'sinatra/reloader'
+require 'sequel'
 
 class UberFavoritos < Sinatra::Application
+  set :json_encoder, :to_json
+
+  configure :development do
+    register Sinatra::Reloader
+  end
 end
+
+Sequel::Model.plugin :json_serializer
 
 require_relative 'config/database'
 require_relative 'models/favorite'
