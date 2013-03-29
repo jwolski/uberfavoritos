@@ -22,3 +22,6 @@ DONE 5) Create Sequel model for Favorite
 7) See if there's a better way to do idiomatic Sinatra database config (e.g. database.yml... Look at how ideeli did it with DAM)
 8) 404 pages
 9) Get connection string out of database.rb and put into maybe database.yml for Rakefile to share
+
+Questions
+1) User management?
