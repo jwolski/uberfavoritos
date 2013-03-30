@@ -12,6 +12,9 @@ schema.
 
 4) Used integer based migrations numbers instead of timestamp
 
+5) Denormalization of data to display favorites
+Went with normalization of data to display abstraction of concepts
+
 TODO:
 DONE 1) Get database config into config file
 DONE 2) Create local postgres database
@@ -22,6 +25,10 @@ DONE 5) Create Sequel model for Favorite
 7) See if there's a better way to do idiomatic Sinatra database config (e.g. database.yml... Look at how ideeli did it with DAM)
 8) 404 pages
 9) Get connection string out of database.rb and put into maybe database.yml for Rakefile to share
+10) correct doctype header for haml in views
+11) make sure it works cross-browser
+12) split views into partials
 
 Questions
 1) User management?
+2) What does 'new' do in js?

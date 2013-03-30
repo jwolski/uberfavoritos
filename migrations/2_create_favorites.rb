@@ -5,7 +5,9 @@ Sequel.migration do
 
       String :name
       Integer :user_id
-      Integer :location_id
+      Float :latitude
+      Float :longitude
+      String :address
     end
   end
 

@@ -2,6 +2,22 @@
 %html
   %head
     %title uberfavoritos!!!
+    %link{:rel => 'stylesheet', :type => 'text/css', :href => 'stylesheets/bootstrap.min.css'}
+    %script{:type => 'text/javascript', :src => 'javascripts/jquery-1.9.1.min.js'}
+    %script{:type => 'text/javascript', :src => 'javascripts/underscore-min.js'}
     %script{:type => 'text/javascript', :src => 'javascripts/backbone-min.js'}
+    %script{:type => 'text/javascript', :src => 'javascripts/favorites.js'}
   %body
-    %h1 welcome to uberfavoritos!!!!
+    %script{:type => 'text/template', :id => 'favorite-template'}
+      %label
+        <%= name %>
+
+    %h1 uberfavoritos
+
+    %div{:id => 'favorites-view'}
+      %h3 Your Favorites!
+      %ul{:id => 'favorites-list'}
+
+    %div{:id => 'add-favorite-view'}
+
+    %div{:id => 'edit-favorite-view'}
