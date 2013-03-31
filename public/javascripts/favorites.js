@@ -78,17 +78,37 @@ if (typeof(uber.favorites) == 'undefined') {
           this.render();
         },
 
+        editFields: function() {
+          this.showEditFields();
+          this.hideNonEditFields();
+        },
+
         events: {
+          'click #apply-edit-favorite': 'onApplyEditFavoriteClick',
+          'click #cancel-edit-favorite': 'onCancelEditFavoriteClick',
           'click #delete-favorite': 'onDeleteFavoriteClick',
-          'click #edit-favorite': 'onEditFavoriteClick',
-          'click #apply-edit-favorite': 'onApplyEditFavoriteClick'
+          'click #edit-favorite': 'onEditFavoriteClick'
+        },
+
+        hideEditFields: function() {
+          this.$el.find('.edit-field').hide();
+        },
+
+        hideNonEditFields: function() {
+          this.$el.find('.non-edit-field').hide();
         },
 
         onApplyEditFavoriteClick: function() {
-          this.model.save({
-            name: $('input[name=edit-favorite-name]').val(),
-            address: $('input[name=edit-favorite-address]').val()
-          });
+          var name = this.$el.find('input[name=edit-favorite-name]').val();
+          var address = this.$el.find('input[name=edit-favorite-address]').val();
+
+          this.model.save({ name: name, address: address });
+
+          this.revertEditFields();
+        },
+
+        onCancelEditFavoriteClick: function() {
+          this.revertEditFields();
         },
 
         onDeleteFavoriteClick: function() {
@@ -96,8 +116,7 @@ if (typeof(uber.favorites) == 'undefined') {
         },
 
         onEditFavoriteClick: function() {
-          $('input[name=edit-favorite-name]').val(this.model.get('name'));
-          $('input[name=edit-favorite-address]').val(this.model.get('address'));
+          this.editFields();
         },
 
         onModelChanged: function() {
@@ -112,6 +131,19 @@ if (typeof(uber.favorites) == 'undefined') {
           this.$el.html(this.template(this.model.toJSON()));
 
           return this;
+        },
+
+        revertEditFields: function() {
+          this.hideEditFields();
+          this.showNonEditFields();
+        },
+
+        showEditFields: function() {
+          this.$el.find('.edit-field').show();
+        },
+
+        showNonEditFields: function() {
+          this.$el.find('.non-edit-field').show();
         },
 
         template: _.template($('#favorite-template').html())

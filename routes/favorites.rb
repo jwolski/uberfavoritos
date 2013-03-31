@@ -6,7 +6,9 @@ class UberFavoritos < Sinatra::Application
 
     begin
       favorite.delete
-    rescue
+    rescue => ex
+      logger.error "An error occurred while trying to delete a favorite, error='#{ex.message}' id=#{favorite.id}"
+
       raise Errors::InternalServerError
     end
 
@@ -26,7 +28,9 @@ class UberFavoritos < Sinatra::Application
 
     begin
       favorite = Favorite.create(:name => name, :address => address)
-    rescue
+    rescue => ex
+      logger.error "An error occurred while trying to create a favorite, error=#{ex.message} name='#{name}' address='#{address}'"
+
       raise Errors::InternalServerError
     end
 
@@ -40,7 +44,9 @@ class UberFavoritos < Sinatra::Application
 
     begin
       favorite.update(:name => name, :address => address)
-    rescue
+    rescue => ex
+      logger.error "An error occurred while trying to update a favorite, error='#{ex.message}' id=#{favorite.id} name='#{name}' address='#{address}'"
+
       raise Errors::InternalServerError
     end
 

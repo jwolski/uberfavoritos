@@ -1,6 +1,7 @@
 require 'sequel'
 
-Sequel::Model.plugin :json_serializer
+# :naked prevents json_class from being added into JSON returned from endpoint
+Sequel::Model.plugin :json_serializer, :naked => true
 
 configure :development do
   Sequel.connect('postgres://localhost/uberfavoritos')

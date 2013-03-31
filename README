@@ -34,6 +34,7 @@ DONE 5) Create Sequel model for Favorite
 13) handle errors from endpoint
 14) paginate
 15) return good data from endpoints
+16) auto complete
 
 Questions
 1) User management?
