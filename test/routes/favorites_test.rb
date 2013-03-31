@@ -31,6 +31,16 @@ class FavoritesTest < Test::Unit::TestCase
     assert_nil Favorite[favorite.id]
   end
 
+  def test_delete_unexpected_error
+    favorite = Favorite.create(:name => 'Home', :address => '123 Some St.')
+
+    Favorite.any_instance.stubs(:delete).raises
+
+    @browser.delete '/favorites/' + favorite.id.to_s
+
+    assert_equal 500, status_code
+  end
+
   def test_delete_favorite_with_invalid_id
     @browser.delete '/favorites/1'
 
@@ -38,12 +48,18 @@ class FavoritesTest < Test::Unit::TestCase
   end
 
   def test_create_favorite
-    favorite = Favorite.create(:name => 'Home', :address => '123 Some St.')
-
-    @browser.delete '/favorites/' + favorite.id.to_s
+    @browser.post '/favorites', data
 
     assert @browser.last_response.ok?
-    assert_nil Favorite[favorite.id]
+    assert response_body['id'] > 0
+  end
+
+  def test_create_unexpected_error
+    Favorite.stubs(:create).raises
+
+    @browser.post 'favorites', data
+
+    assert_equal 500, status_code
   end
 
   def test_create_favorite_with_invalid_name
@@ -68,6 +84,16 @@ class FavoritesTest < Test::Unit::TestCase
     assert @browser.last_response.ok?
     assert_equal 'New Name', favorite.name
     assert_equal 'New Address', favorite.address
+  end
+
+  def test_update_unexpected_error
+    favorite = Favorite.create(:name => 'Home', :address => '123 Some St.')
+
+    Favorite.any_instance.stubs(:update).raises
+
+    @browser.put '/favorites/' + favorite.id.to_s, data('New Name', 'New Address')
+
+    assert_equal 500, status_code
   end
 
   def test_update_favorite_with_invalid_name
