@@ -1,9 +1,10 @@
 require 'sinatra'
 require 'sinatra/json'
 require 'sinatra/reloader'
-require 'sequel'
 
-require_relative 'routes/errors'
+require_relative 'config/init'
+require_relative 'models/init'
+require_relative 'routes/init'
 
 class UberFavoritos < Sinatra::Application
   helpers Sinatra::JSON
@@ -26,11 +27,3 @@ class UberFavoritos < Sinatra::Application
     response.status = 404
   end
 end
-
-Sequel::Model.plugin :json_serializer
-
-require_relative 'config/database'
-require_relative 'models/favorite'
-require_relative 'models/user'
-require_relative 'routes/home'
-require_relative 'routes/favorites'

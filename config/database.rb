@@ -1,5 +1,7 @@
 require 'sequel'
 
+Sequel::Model.plugin :json_serializer
+
 configure :development do
   Sequel.connect('postgres://localhost/uberfavoritos')
 end
