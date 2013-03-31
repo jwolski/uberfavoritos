@@ -21,6 +21,12 @@
           <%= address %>
         %button{:class => 'btn btn-primary', :id => 'edit-favorite'} Edit
         %button{:class => 'btn btn-warning', :id => 'delete-favorite', :'data-loading-text' => 'Deleting...'} Delete
+        %div{:id => 'edit-favorite-view'}
+          %label Name
+          %input{:type => 'text', :name => 'edit-favorite-name'}
+          %label Address
+          %input{:type => 'text', :name => 'edit-favorite-address'}
+          %button{:class => 'btn btn-success', :id => 'apply-edit-favorite', :'data-loading-text' => 'Applying...'} Apply
 
     %h1 uberfavoritos
 

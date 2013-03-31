@@ -43,7 +43,7 @@ if (typeof(uber.favorites) == 'undefined') {
     setupModels: function() {
       this.log('> setupModels');
 
-      var Favorite = Backbone.Model.extend({ });
+      var Favorite = Backbone.Model.extend();
       var FavoriteCollection = Backbone.Collection.extend({ model: Favorite, url: this.endpoint });
 
       window.favorites = new FavoriteCollection();
@@ -58,13 +58,22 @@ if (typeof(uber.favorites) == 'undefined') {
       var FavoriteView = Backbone.View.extend({
         initialize: function() {
           this.listenTo(this.model, 'destroy', this.onModelDestroyed);
+          this.listenTo(this.model, 'change', this.onModelChanged);
 
           this.render();
         },
 
         events: {
           'click #delete-favorite': 'onDeleteFavoriteClick',
-          'click #edit-favorite': 'onEditFavoriteClick'
+          'click #edit-favorite': 'onEditFavoriteClick',
+          'click #apply-edit-favorite': 'onApplyEditFavoriteClick'
+        },
+
+        onApplyEditFavoriteClick: function() {
+          this.model.save({
+            name: $('input[name=edit-favorite-name]').val(),
+            address: $('input[name=edit-favorite-address]').val()
+          });
         },
 
         onDeleteFavoriteClick: function() {
@@ -72,7 +81,12 @@ if (typeof(uber.favorites) == 'undefined') {
         },
 
         onEditFavoriteClick: function() {
-          alert('Favorite Edited!');
+          $('input[name=edit-favorite-name]').val(this.model.get('name'));
+          $('input[name=edit-favorite-address]').val(this.model.get('address'));
+        },
+
+        onModelChanged: function() {
+          this.render();
         },
 
         onModelDestroyed: function() {
@@ -95,19 +109,13 @@ if (typeof(uber.favorites) == 'undefined') {
 
           this.listenTo(favorites, 'add', this.onFavoriteAdded);
 
-          return favorites.fetch({
-            success: function() {
-              return jQuery.getJSON(_self.endpoint, function(data) {
-                _.map(data, function(model) { favorites.create(model); });
-              });
-            }
-          });
+          return favorites.fetch();
         },
 
         el: $('#favorites-view'),
 
         onFavoriteAdded: function(favorite) {
-          _self.log('> FavoritesView addOne');
+          _self.log('> FavoritesView onFavoriteAdded');
 
           var view = new FavoriteView({ model: favorite });
 
