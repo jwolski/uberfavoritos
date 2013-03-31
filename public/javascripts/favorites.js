@@ -9,6 +9,9 @@ _.templateSettings = {
 if (typeof(uber.favorites) == 'undefined') {
   uber.favorites = {
     DEBUG: false,
+    FAILURE_TITLE: 'Oh boy, you dun did it!',
+    SUCCESS_TITLE: 'Oh goody, how about that!',
+
     endpoint: '/favorites',
 
     init: function() {
@@ -43,12 +46,15 @@ if (typeof(uber.favorites) == 'undefined') {
       $('#add-favorite').click(function() {
         $('#add-favorite').button('loading');
 
-        favoriteName = $('input[name=favorite-name]').val();
-        favoriteAddress = $('input[name=favorite-address]').val();
+        attrs = {
+          name: $('input[name=favorite-name]').val(),
+          address: $('input[name=favorite-address]').val()
+        };
 
-        favorites.create({
-          name: favoriteName,
-          address: favoriteAddress
+        favorites.create(attrs, {
+          success: function() { flash.success('You created a new favorite!'); },
+          error: function() { flash.failure('Something bad happened while creating a new favorite!'); },
+          wait: true
         });
 
         $('#add-favorite').button('reset');
@@ -58,16 +64,59 @@ if (typeof(uber.favorites) == 'undefined') {
     setupModels: function() {
       this.log('> setupModels');
 
+      var Flash = Backbone.Model.extend({
+        isError: null,
+        message: null,
+        title: null,
+
+        failure: function(msg) {
+          this.set({ isError: true, message: msg, title: uber.favorites.FAILURE_TITLE });
+        },
+
+        success: function(msg) {
+          this.set({ isError: false, message: msg, title: uber.favorites.SUCCESS_TITLE });
+        }
+      });
+
       var Favorite = Backbone.Model.extend();
       var FavoriteCollection = Backbone.Collection.extend({ model: Favorite, url: this.endpoint });
 
       window.favorites = new FavoriteCollection();
+      window.flash = new Flash();
     },
 
     setupViews: function() {
       this.log('> setupViews');
 
       var _self = this;
+
+      // Set up flash
+      var FlashView = Backbone.View.extend({
+        initialize: function() {
+          this.listenTo(this.model, 'change', this.onModelChanged);
+        },
+
+        happyTemplate: _.template($('#flash-happy-template').html()),
+
+        el: $('#flash-view'),
+
+        errorTemplate: _.template($('#flash-error-template').html()),
+
+        onModelChanged: function() {
+          this.render();
+        },
+
+        render: function() {
+          if (this.model.get('isError')) {
+            this.$el.html(this.errorTemplate(this.model.toJSON()));
+          }
+          else {
+            this.$el.html(this.happyTemplate(this.model.toJSON()));
+          }
+
+          return this;
+        }
+      });
 
       // Set up view for individual favorites
       var FavoriteView = Backbone.View.extend({
@@ -99,10 +148,15 @@ if (typeof(uber.favorites) == 'undefined') {
         },
 
         onApplyEditFavoriteClick: function() {
-          var name = this.$el.find('input[name=edit-favorite-name]').val();
-          var address = this.$el.find('input[name=edit-favorite-address]').val();
+          attrs = {
+            name: this.$el.find('input[name=edit-favorite-name]').val(),
+            address: this.$el.find('input[name=edit-favorite-address]').val()
+          }
 
-          this.model.save({ name: name, address: address });
+          this.model.save(attrs, {
+            success: function() { flash.success('You updated a favorite!'); },
+            error: function() { flash.failure('Something went wrong when updating that favorite!'); },
+          });
 
           this.revertEditFields();
         },
@@ -112,7 +166,11 @@ if (typeof(uber.favorites) == 'undefined') {
         },
 
         onDeleteFavoriteClick: function() {
-          this.model.destroy();
+          this.model.destroy({
+            success: function() { flash.success('You deleted a favorite!'); },
+            error: function() { flash.failure('Something went wrong when deleting that favorite!'); },
+            wait: true
+          });
         },
 
         onEditFavoriteClick: function() {
@@ -181,6 +239,7 @@ if (typeof(uber.favorites) == 'undefined') {
       });
 
       var favoritesView = new FavoritesView();
+      var flashView = new FlashView({ model: flash });
     }
   }
 }
