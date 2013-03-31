@@ -1,0 +1,38 @@
+<script type='text/template' id='favorite-template'>
+  <div class='row-fluid'>
+    <div class='span7'>
+      <strong class='non-edit-field'>{{= name }}</strong><br />
+      <input class='edit-field' type='text' name='edit-favorite-name' style='display:none;' value='{{= name }}' />
+      <label class='non-edit-field'>{{= address }}</label>
+      <input class='edit-field' type='text' name='edit-favorite-address' style='display:none;' value='{{= address }}' />
+    </div>
+    <div class='span5'>
+      <button class='btn btn-primary non-edit-field' id='edit-favorite'>
+        <i class='icon-edit icon-white'> </i>
+      </button>
+      <button class='btn btn-danger non-edit-field' id='delete-favorite'>
+        <i class='icon-remove icon-white'> </i>
+      </button>
+      <button class='btn btn-success edit-field' id='apply-edit-favorite' style='display:none;'>
+        <i class='icon-ok icon-white'> </i>
+      </button>
+      <button class='btn btn-info edit-field' id='cancel-edit-favorite' style='display:none;'>Cancel</button>
+    </div>
+  </div>
+</script>
+
+<script type='text/template' id='flash-error-template'>
+  <div class="alert alert-block alert-error fade in">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4 class="alert-heading">{{= title }}</h4>
+    <p>{{= message }}</p>
+  </div>
+</script>
+
+<script type='text/template' id='flash-happy-template'>
+  <div class="alert alert-block alert-success fade in">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4 class="alert-heading">{{= title }}</h4>
+    <p>{{= message }}</p>
+  </div>
+</script>
