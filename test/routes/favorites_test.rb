@@ -10,9 +10,16 @@ class FavoritesTest < Test::Unit::TestCase
   end
 
   def test_get_favorites
-    @browser.get '/'
+    favorite = Favorite.create(:name => 'Home', :address => '123 Some St.')
+
+    @browser.get '/favorites'
+
+    result = response_body.first
 
     assert @browser.last_response.ok?
+    assert_equal 1, response_body.length
+    assert_equal favorite.name, result.name
+    assert_equal favorite.address, result.address
   end
 
   def test_delete_favorite
@@ -101,6 +108,10 @@ class FavoritesTest < Test::Unit::TestCase
 
   def mock_session
     Rack::MockSession.new(application)
+  end
+
+  def response_body
+    JSON.parse(@browser.last_response.body)
   end
 
   def status_code
