@@ -14,6 +14,7 @@ class UberFavoritos < Sinatra::Application
   end
 
   get '/favorites' do
+    # TODO Introduce pagination for large-ish data sets
     json Favorite
   end
 

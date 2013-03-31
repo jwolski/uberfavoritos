@@ -18,6 +18,11 @@ if (typeof(uber.favorites) == 'undefined') {
       this.setupAddFavoriteHandler();
     },
 
+    clearAddFavoriteFields: function() {
+      $('#add-favorite-view input[name=favorite-name]').val('');
+      $('#add-favorite-view input[name=favorite-address]').val('');
+    },
+
     favoritesListElement: function() { return $('div#favorites-view ul#favorites-list'); },
 
     favoritesViewElement: function() { return $('div#favorites-view'); },
@@ -29,6 +34,8 @@ if (typeof(uber.favorites) == 'undefined') {
         console.log('uber.favorites: ' + message);
       }
     },
+
+    noFavoritesElement: function() { return $('#no-favorites'); },
 
     setupAddFavoriteHandler: function() {
       this.log('> setupAddFavoriteHandler');
@@ -116,6 +123,7 @@ if (typeof(uber.favorites) == 'undefined') {
           _self.log('> FavoritesView initialize');
 
           this.listenTo(favorites, 'add', this.onFavoriteAdded);
+          this.listenTo(favorites, 'destroy', this.onFavoriteDestroyed);
 
           return favorites.fetch();
         },
@@ -129,6 +137,14 @@ if (typeof(uber.favorites) == 'undefined') {
 
           _self.favoritesListElement().append(view.render().el);
           _self.favoritesViewElement().show();
+          _self.noFavoritesElement().hide();
+          _self.clearAddFavoriteFields();
+        },
+
+        onFavoriteDestroyed: function(favorite) {
+          if (favorites.length === 0) {
+            _self.noFavoritesElement().show();
+          }
         }
       });
 
