@@ -1,5 +1,5 @@
 root = ::File.dirname(__FILE__)
 
-require ::File.join(root, 'web')
+require ::File.join(root, 'app')
 
 run UberFavoritos.new

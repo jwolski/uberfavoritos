@@ -16,6 +16,7 @@ schema.
 Went with normalization of data to display abstraction of concepts
 
 6) Would have chosen to go with sprockets or similar for my assets
+7) Tests that rely on DB
 
 TODO:
 DONE 1) Get database config into config file

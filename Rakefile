@@ -1,3 +1,4 @@
+require 'rake/testtask'
 require 'sequel'
 
 def establish_connection
@@ -48,5 +49,13 @@ namespace :db do
     task :clear do
       [Favorite, User].map(&:delete)
     end
+  end
+end
+
+namespace :test do
+  Rake::TestTask.new(:run) do |task|
+    task.test_files = %w(
+      test/routes/favorites_test.rb
+    )
   end
 end

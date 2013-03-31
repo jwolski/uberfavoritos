@@ -3,6 +3,8 @@ require 'sinatra/json'
 require 'sinatra/reloader'
 require 'sequel'
 
+require_relative 'routes/errors'
+
 class UberFavoritos < Sinatra::Application
   helpers Sinatra::JSON
 
@@ -10,6 +12,18 @@ class UberFavoritos < Sinatra::Application
 
   configure :development do
     register Sinatra::Reloader
+  end
+
+  error Errors::InternalServerError do
+    response.status = 500
+  end
+
+  error Errors::InvalidParameters do
+    response.status = 400
+  end
+
+  error Errors::NotFound do
+    response.status = 404
   end
 end
 
