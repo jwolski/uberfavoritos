@@ -3,6 +3,7 @@
   <head>
     <title>uberfavoritos!!!</title>
     <link rel='stylesheet' type='text/css' href='stylesheets/bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='stylesheets/docs.css' />
     <script type='text/javascript' src='javascripts/jquery-1.9.1.min.js'></script>
     <script type='text/javascript' src='javascripts/underscore-min.js'></script>
     <script type='text/javascript' src='javascripts/backbone-min.js'></script>
@@ -23,38 +24,46 @@
           <input class='edit-field' type='text' name='edit-favorite-address' style='display:none;' value='{{= address }}' />
         </div>
         <div class='span5'>
-          <button class='btn btn-primary non-edit-field' id='edit-favorite'>Edit</button>
-          <button class='btn btn-warning non-edit-field' id='delete-favorite'>Delete</button>
-          <button class='btn btn-success edit-field' id='apply-edit-favorite' style='display:none;'>Apply</button>
+          <button class='btn btn-primary non-edit-field' id='edit-favorite'>
+            <i class='icon-edit icon-white'> </i>
+          </button>
+          <button class='btn btn-danger non-edit-field' id='delete-favorite'>
+            <i class='icon-remove icon-white'> </i>
+          </button>
+          <button class='btn btn-success edit-field' id='apply-edit-favorite' style='display:none;'>
+            <i class='icon-ok icon-white'> </i>
+          </button>
           <button class='btn btn-info edit-field' id='cancel-edit-favorite' style='display:none;'>Cancel</button>
         </div>
       </div>
     </script>
 
-    <h1>uberfavoritos!!!</h1>
+    <h1 class='text-center'>uberfavoritos!!!</h1>
 
     <div class='container-fluid'>
       <div class='row-fluid'>
-        <div class='span12' style='background-color:pink'>
-          Flash Messages Abound!!!
+        <div class='span12 alert alert-block alert-error fade in'>
+          <a class="close" data-dismiss="alert" href="#">&times;</a>
         </div>
       <div class='row-fluid'>
         <div class='span4'>
-          <div class='row-fluid' style='background-color:gray'>
-            <h3>Your Favorites</h3>
+          <div class='row-fluid' style='border-bottom:1px solid #CCC;border-top:1px solid #CCC'>
+            <h4>Your Favorites</h4>
             <label id='no-favorites'>You have no favorites #sadface. Add some below!</label>
             <div id='favorites-view'>
               <ul id='favorites-list'></ul>
             </div>
           </div>
-          <div class='row-fluid' style='background-color:yellow'>
-            <h3>Add Your Own Favorite</h3>
+          <div class='row-fluid' style='border-bottom:1px solid #CCC'>
+            <h4>Add Your Own Favorite</h4>
             <div id='add-favorite-view'>
               <label>Name</label>
               <input type='text' name='favorite-name' placeholder='Tartine' />
               <label>Address</label>
               <input type='text' name='favorite-address' placeholder='600 Guerrero St, San Francisco, CA 94110' />
-              <button class='btn btn-success' id='add-favorite'>Add</button>
+              <button class='btn btn-success' id='add-favorite'>
+                <i class='icon-plus-sign icon-white'> </i>
+              </button>
             </div>
           </div>
         </div>
