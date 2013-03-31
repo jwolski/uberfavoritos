@@ -1,5 +1,11 @@
 var uber = uber || {};
 
+// Avoid collisions between erb and underscore templates
+_.templateSettings = {
+    interpolate: /\{\{\=(.+?)\}\}/g,
+    evaluate: /\{\{(.+?)\}\}/g
+};
+
 if (typeof(uber.favorites) == 'undefined') {
   uber.favorites = {
     DEBUG: false,
@@ -25,6 +31,8 @@ if (typeof(uber.favorites) == 'undefined') {
     },
 
     setupAddFavoriteHandler: function() {
+      this.log('> setupAddFavoriteHandler');
+
       $('#add-favorite').click(function() {
         $('#add-favorite').button('loading');
 
@@ -50,9 +58,9 @@ if (typeof(uber.favorites) == 'undefined') {
     },
 
     setupViews: function() {
-      var _self = this;
-
       this.log('> setupViews');
+
+      var _self = this;
 
       // Set up view for individual favorites
       var FavoriteView = Backbone.View.extend({

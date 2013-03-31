@@ -1,7 +1,5 @@
-require 'haml'
-
 class UberFavoritos < Sinatra::Application
   get '/' do
-    haml :index
+    erb :index
   end
 end

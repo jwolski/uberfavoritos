@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>uberfavoritos!!!</title>
+    <link rel='stylesheet' type='text/css' href='stylesheets/bootstrap.min.css' />
+    <script type='text/javascript' src='javascripts/jquery-1.9.1.min.js'></script>
+    <script type='text/javascript' src='javascripts/underscore-min.js'></script>
+    <script type='text/javascript' src='javascripts/backbone-min.js'></script>
+    <script type='text/javascript' src='javascripts/bootstrap.min.js'></script>
+    <script type='text/javascript' src='javascripts/favorites.js'></script>
+    <script type='text/javascript'>
+      $(function() {
+        uber.favorites.init();
+      });
+    </script>
+  </head>
+
+  <body>
+    <script type='text/template' id='favorite-template'>
+      <div class='favorite-details'>
+        <address>
+          <strong>{{= name }}</strong><br />
+          {{= address }}
+        </address>
+        <button class='btn btn-primary' id='edit-favorite'>Edit</button>
+        <button class='btn btn-warning' id='delete-favorite'>Delete</button>
+        <div id='edit-favorite-view'>
+          <label>Name</label>
+          <input type='text' name='edit-favorite-name'>
+          <label>Address</label>
+          <input type='text' name='edit-favorite-address'>
+          <button class='btn btn-success' id='apply-edit-favorite'>Apply</button>
+        </div>
+      </div>
+    </script>
+
+    <h1>uberfavoritos!!!</h1>
+
+    <div class='container-fluid'>
+      <div class='row-fluid'>
+        <div class='span4'>
+          <div class='row-fluid' style='background-color:gray'>
+            <h3>Your Favorites</h3>
+            <div id='favorites-view'>
+              <ul id='favorites-list'></ul>
+            </div>
+          </div>
+          <div class='row-fluid' style='background-color:yellow'>
+            <h3>Add Your Own Favorite</h3>
+            <div id='add-favorite-view'>
+              <label>Name</label>
+              <input type='text' name='favorite-name' placeholder='Tartine' />
+              <label>Address</label>
+              <input type='text' name='favorite-address' placeholder='600 Guerrero St, San Francisco, CA 94110' />
+              <button class='btn btn-success' id='add-favorite'>Add</button>
+            </div>
+          </div>
+        </div>
+        <div class='span8' style='background-color:blue'>MAP</div>
+      </div>
+    </div>
+
+  </body>
+</html>
