@@ -15,6 +15,8 @@ schema.
 5) Denormalization of data to display favorites
 Went with normalization of data to display abstraction of concepts
 
+6) Would have chosen to go with sprockets or similar for my assets
+
 TODO:
 DONE 1) Get database config into config file
 DONE 2) Create local postgres database
@@ -28,6 +30,9 @@ DONE 5) Create Sequel model for Favorite
 10) correct doctype header for haml in views
 11) make sure it works cross-browser
 12) split views into partials
+13) handle errors from endpoint
+14) paginate
+15) return good data from endpoints
 
 Questions
 1) User management?

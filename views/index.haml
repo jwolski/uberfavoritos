@@ -6,11 +6,21 @@
     %script{:type => 'text/javascript', :src => 'javascripts/jquery-1.9.1.min.js'}
     %script{:type => 'text/javascript', :src => 'javascripts/underscore-min.js'}
     %script{:type => 'text/javascript', :src => 'javascripts/backbone-min.js'}
+    %script{:type => 'text/javascript', :src => 'javascripts/bootstrap.min.js'}
     %script{:type => 'text/javascript', :src => 'javascripts/favorites.js'}
+    :javascript
+      $(function() {
+        uber.favorites.init();
+      });
   %body
     %script{:type => 'text/template', :id => 'favorite-template'}
-      %label
-        <%= name %>
+      %div{:class => 'favorite-details', :style => 'clear: both; float: left'}
+        %address
+          %strong <%= name %>
+          %br
+          <%= address %>
+        %button{:class => 'btn btn-primary', :id => 'edit-favorite'} Edit
+        %button{:class => 'btn btn-warning', :id => 'delete-favorite', :'data-loading-text' => 'Deleting...'} Delete
 
     %h1 uberfavoritos
 
@@ -19,5 +29,8 @@
       %ul{:id => 'favorites-list'}
 
     %div{:id => 'add-favorite-view'}
-
-    %div{:id => 'edit-favorite-view'}
+    %label Name
+    %input{:type => 'text', :name => 'favorite-name', :placeholder => 'Tartine'}
+    %label Address
+    %input{:type => 'text', :name => 'favorite-address', :placeholder => '600 Guerrero St, San Francisco, CA 94110'}
+    %button{:class => 'btn btn-success', :id => 'add-favorite', :'data-loading-text' => 'Adding...'} Add
