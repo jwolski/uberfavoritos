@@ -15,15 +15,22 @@ Usage (Functionality):
 
 Directory structure:
 ----
-* /app/models - ORM mappings
-* /app/routes - Endpoint definitions
-* /app/views - ERB templates
-* /config - Configuration initializers
-* /migrations - Database migrations (see Rakefile to run)
-* /public/css - App and vendor stylesheets
-* /public/img - Vendor images
-* /public/js - App and vendor javascripts
-* /test/routes - Functional tests for endpoints
+* app/models - ORM mappings
+* app/routes - Endpoint definitions
+* app/views - ERB templates
+* config - Configuration initializers
+* migrations - Database migrations (see Rakefile to run)
+* public/css - App and vendor stylesheets
+* public/img - Vendor images
+* public/js - App and vendor javascripts
+* test/routes - Functional tests for endpoints
+
+Endpoints:
+----
+* DELETE /favorites/:id - Deletes a favorite provided an ID
+* GET /favorites - Returns a list of all favorites
+* POST /favorites - Creates a favorite provided: name, address, latitude and longitude
+* PUT /favorites/:id - Updates a favorite provided: id, name, address, latitude and longitude
 
 Rake tasks:
 ----
