@@ -14,8 +14,10 @@ if (typeof(uber.favorites.map) == 'undefined') {
       var mapOptions = {
         center: new google.maps.LatLng(37.775, -122.4183),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
+        panControl: false,
         zoom: 12,
-        zoomControl: true
+        zoomControl: true,
+        zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL }
       };
 
       window.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
