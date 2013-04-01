@@ -10,20 +10,20 @@ Usage (Functionality):
 * Editing favorites: Edit a favorite by clicking the Edit button in the list of favorites, filling in both required fields and by clicking the Apply button. You can also cancel out of the modifications by clicking the Cancel button.
 * Flashes messages - Flash messages will appear with every action performed
 * Pin drop: Pins drop on initial page load (for existing favorites) and any that you may add later. Hover over the pin and a tooltip will tell you the name of the favorite.
-* Pin replacement: Pins are replaced
+* Pin replacement: Pins are replaced when a favorite is updated
 * Pin removal:  Pins are removed when a favorite is deleted
 
 Directory structure:
 ----
-* app/models - ORM mappings
-* app/routes - Endpoint definitions
-* app/views - ERB templates
-* config - Configuration initializers
-* migrations - Database migrations (see Rakefile to run)
-* public/css - App and vendor stylesheets
-* public/img - Vendor images
-* public/js - App and vendor javascripts
-* test/routes - Functional tests for endpoints
+* app/models/ - ORM mappings
+* app/routes/ - Endpoint definitions
+* app/views/ - ERB templates
+* config/ - Configuration initializers
+* migrations/ - Database migrations (see Rakefile to run)
+* public/css/ - App and vendor stylesheets
+* public/img/ - Vendor images
+* public/js/ - App and vendor javascripts
+* test/routes/ - Functional tests for endpoints
 
 Endpoints:
 ----
