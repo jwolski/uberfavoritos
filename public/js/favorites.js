@@ -33,6 +33,7 @@ if (typeof(uber.favorites) == 'undefined') {
       this.setupAddFavoriteHandler();
     },
 
+    // Clears text fields in Add Favorite section
     clearAddFavoriteFields: function() {
       $('#add-favorite-view input[name=favorite-name]').val('');
       $('#add-favorite-view input[name=favorite-address]').val('');
@@ -52,10 +53,10 @@ if (typeof(uber.favorites) == 'undefined') {
       var _self = uber.favorites;
 
       _self.$addFavoriteButton.click(function() {
-        _self.$addFavoriteButton.button('loading');
-
         var address = $('input[name=favorite-address]').val();
 
+        // Create a new favorite if fetching a geocode comes back with a
+        // valid latitude and longitude value.
         uber.favorites.map.fetchGeocode(address, {
           success: function(latitude, longtitude) {
             var attrs = {
@@ -76,19 +77,14 @@ if (typeof(uber.favorites) == 'undefined') {
             flash.failure("Couldn't find geocode for that address. Try another!");
           }
         });
-
-        $('#add-favorite').button('reset');
       });
     },
 
     setupModels: function() {
       this.log('> setupModels');
 
+      // Create a model for flash messages
       var Flash = Backbone.Model.extend({
-        isError: null,
-        message: null,
-        title: null,
-
         failure: function(msg) {
           this.set({ isError: true, message: msg, title: uber.favorites.FAILURE_TITLE });
         },
@@ -127,6 +123,8 @@ if (typeof(uber.favorites) == 'undefined') {
         },
 
         render: function() {
+          // If the message is an error render the error template
+          // otherwise render the success template
           if (this.model.get('isError')) {
             this.$el.html(this.errorTemplate(this.model.toJSON()));
           }
@@ -173,6 +171,7 @@ if (typeof(uber.favorites) == 'undefined') {
           var newAddress = _self.$el.find('input[name=edit-favorite-address]').val();
           var oldName = _self.model.get('name');
 
+          // Perform geocode lookup based on new address.
           uber.favorites.map.fetchGeocode(newAddress, {
             success: function(latitude, longitude) {
               var newName = _self.$el.find('input[name=edit-favorite-name]').val();
@@ -184,6 +183,7 @@ if (typeof(uber.favorites) == 'undefined') {
                 longitude: longitude
               };
 
+              // Update model upon successful geocode-fetch
               _self.model.save(attrs, {
                 success: function() {
                   uber.favorites.map.replaceMarker(oldName, newName, latitude, longitude);
