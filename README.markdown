@@ -29,11 +29,11 @@ Directory structure:
 
 Rake tasks:
 ----
-db:data:clear - Clears all data from tables
-db:data:seed - Adds some seed data
-db:migrate:down - Resets DB
-db:migrate:up - Migrates to latest
-test:run - Runs functional tests
+* db:data:clear - Clears all data from tables
+* db:data:seed - Adds some seed data
+* db:migrate:down - Resets DB
+* db:migrate:up - Migrates to latest
+* test:run - Runs functional tests
 
 Backend tech:
 ----
@@ -52,6 +52,7 @@ Frontend tech:
 * Underscore
 
 Assumptions made:
+----
 1. Single user system
 2. Integer based migrations instead of timestamp
 3. Denormalized storage of favorites
