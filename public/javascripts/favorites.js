@@ -11,7 +11,7 @@ if (typeof(uber.favorites) == 'undefined') {
     DEBUG: false,
     ENDPOINT: '/favorites',
     FAILURE_TITLE: 'Oh boy, you dun did it!',
-    SUCCESS_TITLE: 'Oh goody, how about that!',
+    SUCCESS_TITLE: 'Oh goody, how about that!!?!??',
 
     $addFavoriteButton: null,
     $favoritesListElement: null,
@@ -67,7 +67,7 @@ if (typeof(uber.favorites) == 'undefined') {
 
             favorites.create(attrs, {
               success: function() { flash.success('You created a new favorite!'); },
-              error: function() { flash.failure('Something bad happened while creating a new favorite!'); },
+              error: function() { flash.failure('Hey, did you forget a param??!?'); },
               wait: true
             });
           },
