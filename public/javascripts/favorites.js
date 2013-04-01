@@ -10,8 +10,8 @@ if (typeof(uber.favorites) == 'undefined') {
   uber.favorites = {
     DEBUG: false,
     ENDPOINT: '/favorites',
-    FAILURE_TITLE: 'ERRRROAR',
-    SUCCESS_TITLE: 'WINNAR',
+    FAILURE_TITLE: 'Blamo!',
+    SUCCESS_TITLE: 'Bingo!',
 
     $addFavoriteButton: null,
     $favoritesListElement: null,
