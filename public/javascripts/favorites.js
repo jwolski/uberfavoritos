@@ -46,7 +46,7 @@ if (typeof(uber.favorites) == 'undefined') {
       $('#add-favorite').click(function() {
         $('#add-favorite').button('loading');
 
-        attrs = {
+        var attrs = {
           name: $('input[name=favorite-name]').val(),
           address: $('input[name=favorite-address]').val()
         };
@@ -148,7 +148,7 @@ if (typeof(uber.favorites) == 'undefined') {
         },
 
         onApplyEditFavoriteClick: function() {
-          attrs = {
+          var attrs = {
             name: this.$el.find('input[name=edit-favorite-name]').val(),
             address: this.$el.find('input[name=edit-favorite-address]').val()
           }
