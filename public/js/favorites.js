@@ -170,27 +170,30 @@ if (typeof(uber.favorites) == 'undefined') {
         onApplyEditFavoriteClick: function() {
           var _self = this;
 
-          var address = $('input[name=edit-favorite-address]').val();
+          var newAddress = _self.$el.find('input[name=edit-favorite-address]').val();
           var oldName = _self.model.get('name');
 
-          uber.favorites.map.fetchGeocode(address, {
+          uber.favorites.map.fetchGeocode(newAddress, {
             success: function(latitude, longitude) {
-              var name = $('input[name=edit-favorite-name]').val();
+              var newName = _self.$el.find('input[name=edit-favorite-name]').val();
 
               var attrs = {
-                name: name,
-                address: $('input[name=edit-favorite-address]').val(),
+                name: newName,
+                address: newAddress,
                 latitude: latitude,
                 longitude: longitude
               };
 
               _self.model.save(attrs, {
-                success: function() { flash.success('That old info was no good anyway!! :DD!'); },
-                error: function() { flash.failure('Did you forget some required info?'); },
-              });
+                success: function() {
+                  uber.favorites.map.replaceMarker(oldName, newName, latitude, longitude);
+                  _self.revertEditFields();
 
-              uber.favorites.map.replaceMarker(oldName, name, latitude, longitude);
-              uber.favorites.revertEditFields();
+                  flash.success('That old info was no good anyway!! :DD');
+                },
+                error: function() { flash.failure('Did you forget some required info?'); },
+                wait: true
+              });
             },
 
             error: function() {

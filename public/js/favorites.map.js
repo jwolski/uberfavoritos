@@ -79,11 +79,11 @@ if (typeof(uber.favorites.map) == 'undefined') {
         new google.maps.LatLng(37.775, -122.4183),
         new google.maps.LatLng(37.775, -122.4183));
 
-      var input = document.getElementById('favorite-address');
+      var addAddressElement = document.getElementById('favorite-address');
 
       var options = { bounds: defaultBounds };
 
-      autocomplete = new google.maps.places.Autocomplete(input, options);
+      var addAutoComplete = new google.maps.places.Autocomplete(addAddressElement, options);
     }
   }
 }
