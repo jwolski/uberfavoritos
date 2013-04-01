@@ -1,7 +1,7 @@
 uberfavoritos!
 ====
 
-This is a small little web app that allows you to add favorite locations!
+This is a small little web app that allows you to manage your favorite locations. Add, delete, edit and locate your favorites on a map.
 
 Usage (Functionality):
 ----
