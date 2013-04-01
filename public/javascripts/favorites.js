@@ -10,8 +10,8 @@ if (typeof(uber.favorites) == 'undefined') {
   uber.favorites = {
     DEBUG: false,
     ENDPOINT: '/favorites',
-    FAILURE_TITLE: 'Oh boy, you dun did it!',
-    SUCCESS_TITLE: 'Oh goody, how about that!!?!??',
+    FAILURE_TITLE: 'ERRRROAR',
+    SUCCESS_TITLE: 'WINNAR',
 
     $addFavoriteButton: null,
     $favoritesListElement: null,
@@ -171,14 +171,17 @@ if (typeof(uber.favorites) == 'undefined') {
           var _self = this;
 
           var address = $('input[name=edit-favorite-address]').val();
+          var oldName = _self.model.get('name');
 
           uber.favorites.map.fetchGeocode(address, {
-            success: function(latitude, longtitude) {
+            success: function(latitude, longitude) {
+              var name = $('input[name=edit-favorite-name]').val();
+
               var attrs = {
-                name: $('input[name=edit-favorite-name]').val(),
+                name: name,
                 address: $('input[name=edit-favorite-address]').val(),
                 latitude: latitude,
-                longitude: longtitude
+                longitude: longitude
               };
 
               _self.model.save(attrs, {
@@ -186,6 +189,7 @@ if (typeof(uber.favorites) == 'undefined') {
                 error: function() { flash.failure('Something went wrong when updating that favorite!'); },
               });
 
+              uber.favorites.map.replaceMarker(oldName, name, latitude, longitude);
               uber.favorites.revertEditFields();
             },
 
@@ -201,7 +205,7 @@ if (typeof(uber.favorites) == 'undefined') {
 
         onDeleteFavoriteClick: function() {
           this.model.destroy({
-            success: function() { flash.success('You deleted a favorite!'); },
+            success: function() { flash.success(':(( So sad to see that favorite go!'); },
             error: function() { flash.failure('Something went wrong when deleting that favorite!'); },
             wait: true
           });

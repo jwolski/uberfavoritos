@@ -14,11 +14,13 @@ if (typeof(uber.favorites.map) == 'undefined') {
       var mapOptions = {
         center: new google.maps.LatLng(37.775, -122.4183),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        zoom: 8,
+        zoom: 12,
         zoomControl: true
       };
 
       window.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      this.setupAutocomplete();
     },
 
     addMarker: function(name, latitude, longitude) {
@@ -55,6 +57,13 @@ if (typeof(uber.favorites.map) == 'undefined') {
       });
     },
 
+    replaceMarker: function(oldName, newName, latitude, longitude) {
+      var _self = uber.favorites.map;
+
+      _self.removeMarker(oldName);
+      _self.addMarker(newName, latitude, longitude);
+    },
+
     removeMarker: function(name) {
       var _self = uber.favorites.map;
 
@@ -63,6 +72,18 @@ if (typeof(uber.favorites.map) == 'undefined') {
           marker.setMap(null);
         }
       });
+    },
+
+    setupAutocomplete: function() {
+      var defaultBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(37.775, -122.4183),
+        new google.maps.LatLng(37.775, -122.4183));
+
+      var input = document.getElementById('favorite-address');
+
+      var options = { bounds: defaultBounds };
+
+      autocomplete = new google.maps.places.Autocomplete(input, options);
     }
   }
 }

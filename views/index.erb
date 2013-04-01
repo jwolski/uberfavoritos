@@ -9,7 +9,7 @@
     <script type='text/javascript' src='javascripts/backbone-min.js'></script>
     <script type='text/javascript' src='javascripts/bootstrap.min.js'></script>
     <script type='text/javascript' src='javascripts/favorites.js'></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCULfzmoUD9BWDUZ41mvSs7w9Gq3ojRJco&sensor=true"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCULfzmoUD9BWDUZ41mvSs7w9Gq3ojRJco&sensor=true&libraries=places"></script>
     <script type='text/javascript' src='javascripts/favorites.map.js'></script>
     <script type='text/javascript'>
       $(function() {
@@ -32,7 +32,7 @@
             <h4>Add Your Own Favorite</h4>
             <div id='add-favorite-view'>
               <input type='text' name='favorite-name' style='width:350px' placeholder='Name' />
-              <input type='text' name='favorite-address' style='width:350px' placeholder='Address' /><br />
+              <input type='text' id='favorite-address' name='favorite-address' style='width:350px' placeholder='Address' /><br />
               <button class='btn btn-success' id='add-favorite'>
                 <i class='icon-plus-sign icon-white'> </i>
               </button>
