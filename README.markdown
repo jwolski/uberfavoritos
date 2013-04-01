@@ -5,9 +5,9 @@ This is a small little web app that allows you to add favorite locations!
 
 Usage (Functionality):
 ----
-* Adding favorites: Add a favorite from the left side bar by filling in both required fields and clicking the Add button. When typing in the Address field, the address will be auto-completed using Google's Places API. After clicking the Add button, a Geocode lookup is performance against Google's Geocode API.
-* Deleting favorites: Delete a favorite by clicking the Delete button
-* Editing favorites: Edit a favorite by clicking the Edit button, filling in both required fields and by clicking the Apply button. You can also cancel out of the modifications by clicking the Cancel button.
+* Adding favorites: Add a favorite from the left side bar by filling in both required fields and clicking the Add button. When typing in the Address field, the address will be auto-completed using Google's Places API. After clicking the Add button, a Geocode lookup is performed against Google's Geocode API.
+* Deleting favorites: Delete a favorite by clicking the Delete button in the list of favorites.
+* Editing favorites: Edit a favorite by clicking the Edit button in the list of favorites, filling in both required fields and by clicking the Apply button. You can also cancel out of the modifications by clicking the Cancel button.
 * Flashes messages - Flash messages will appear with every action performed
 * Pin drop: Pins drop on initial page load (for existing favorites) and any that you may add later
 * Pin replacement: Pins are replaced
