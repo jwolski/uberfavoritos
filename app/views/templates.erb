@@ -1,10 +1,10 @@
 <script type='text/template' id='favorite-template'>
   <div class='row-fluid'>
     <div class='span7' style='padding:5px'>
-      <strong class='non-edit-field'>{{= name }}</strong><br />
       <input class='edit-field' type='text' name='edit-favorite-name' style='display:none;' value='{{= name }}' />
-      <em class='non-edit-field'>{{= address }} ({{= latitude}}, {{= longitude }})</em>
+      <strong class='non-edit-field'>{{= name }}</strong><br />
       <input class='edit-field' type='text' id='edit-favorite-address' name='edit-favorite-address' style='display:none;' value='{{= address }}' />
+      <em class='non-edit-field'>{{= address }} ({{= latitude}}, {{= longitude }})</em>
     </div>
     <div class='span5'>
       <button class='btn btn-primary non-edit-field' id='edit-favorite'>
