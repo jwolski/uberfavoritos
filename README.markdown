@@ -3,17 +3,15 @@ uberfavoritos!
 
 This is a small little web app that allows you to add favorite locations!
 
-App usage:
-Address auto-complete: Address auto-completes when adding a favorite
-Add favorite: Add a favorite in the left side bar from the add favorites section
-Delete favorite: Delete a favorite by clicking the Delete button
-Edit favorite: Edit a favorite by clicking the Edit button, modifying the information
-Cancel edit favorite: You can cancel out of editing a favorite by clicking the Cancel button
-Geocode lookup: Latitude and longitude lookup are performed when adding and editing a favorite
-Pin drop: Pins drop on initial page load (for existing favorites) and any that you may add later
-Pin replacement - Pins are replaced
-Pin removal - Pins are removed when a favorite is deleted
-Flashes - Flash messages will appear with every action performed
+Usage (Functionality):
+----
+* Adding favorites: Add a favorite from the left side bar by filling in both required fields and clicking the Add button. When typing in the Address field, the address will be auto-completed using Google's Places API. After clicking the Add button, a Geocode lookup is performance against Google's Geocode API.
+* Deleting favorites: Delete a favorite by clicking the Delete button
+* Editing favorites: Edit a favorite by clicking the Edit button, filling in both required fields and by clicking the Apply button. You can also cancel out of the modifications by clicking the Cancel button.
+* Flashes messages - Flash messages will appear with every action performed
+* Pin drop: Pins drop on initial page load (for existing favorites) and any that you may add later
+* Pin replacement: Pins are replaced
+* Pin removal:  Pins are removed when a favorite is deleted
 
 Directory structure:
 ----
@@ -57,4 +55,4 @@ Assumptions made:
 2. Integer based migrations instead of timestamp
 3. Denormalized storage of favorites
 4. Did not use Sprockets for asset pipelining
-5) Some functional tests rely on DB
+5. Some functional tests rely on DB
