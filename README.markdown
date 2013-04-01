@@ -9,7 +9,7 @@ Usage (Functionality):
 * Deleting favorites: Delete a favorite by clicking the Delete button in the list of favorites.
 * Editing favorites: Edit a favorite by clicking the Edit button in the list of favorites, filling in both required fields and by clicking the Apply button. You can also cancel out of the modifications by clicking the Cancel button.
 * Flashes messages - Flash messages will appear with every action performed
-* Pin drop: Pins drop on initial page load (for existing favorites) and any that you may add later
+* Pin drop: Pins drop on initial page load (for existing favorites) and any that you may add later. Hover over the pin and a tooltip will tell you the name of the favorite.
 * Pin replacement: Pins are replaced
 * Pin removal:  Pins are removed when a favorite is deleted
 
@@ -40,6 +40,11 @@ Backend tech:
 * Rack
 * Sinatra
 * Sequel
+
+Tested on:
+----
+* Firefox 19.0 for Mac
+* Chrome 25.0 for Mac
 
 Frontend tech:
 ----
