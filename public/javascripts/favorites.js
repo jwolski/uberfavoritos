@@ -9,13 +9,25 @@ _.templateSettings = {
 if (typeof(uber.favorites) == 'undefined') {
   uber.favorites = {
     DEBUG: false,
+    ENDPOINT: '/favorites',
     FAILURE_TITLE: 'Oh boy, you dun did it!',
     SUCCESS_TITLE: 'Oh goody, how about that!',
 
-    endpoint: '/favorites',
+    $addFavoriteButton: null,
+    $favoritesListElement: null,
+    $favoritesViewElement: null,
+    $noFavoritesElement: null,
 
     init: function() {
       this.log('> init');
+
+      var _self = uber.favorites;
+
+      _self.$addFavoriteButton = $('#add-favorite');
+      _self.$favoritesListElement = $('div#favorites-view ul#favorites-list');
+      _self.$favoritesViewElement = $('div#favorites-view');
+      _self.$noFavoritesElement = $('#no-favorites');
+
       this.setupModels();
       this.setupViews();
       this.setupAddFavoriteHandler();
@@ -26,10 +38,6 @@ if (typeof(uber.favorites) == 'undefined') {
       $('#add-favorite-view input[name=favorite-address]').val('');
     },
 
-    favoritesListElement: function() { return $('div#favorites-view ul#favorites-list'); },
-
-    favoritesViewElement: function() { return $('div#favorites-view'); },
-
     log: function(message) {
       if (uber.favorites.DEBUG) {
         message = message.toString();
@@ -38,23 +46,35 @@ if (typeof(uber.favorites) == 'undefined') {
       }
     },
 
-    noFavoritesElement: function() { return $('#no-favorites'); },
-
     setupAddFavoriteHandler: function() {
       this.log('> setupAddFavoriteHandler');
 
-      $('#add-favorite').click(function() {
-        $('#add-favorite').button('loading');
+      var _self = uber.favorites;
 
-        var attrs = {
-          name: $('input[name=favorite-name]').val(),
-          address: $('input[name=favorite-address]').val()
-        };
+      _self.$addFavoriteButton.click(function() {
+        _self.$addFavoriteButton.button('loading');
 
-        favorites.create(attrs, {
-          success: function() { flash.success('You created a new favorite!'); },
-          error: function() { flash.failure('Something bad happened while creating a new favorite!'); },
-          wait: true
+        var address = $('input[name=favorite-address]').val();
+
+        uber.favorites.map.fetchGeocode(address, {
+          success: function(latitude, longtitude) {
+            var attrs = {
+              name: $('input[name=favorite-name]').val(),
+              address: $('input[name=favorite-address]').val(),
+              latitude: latitude,
+              longitude: longtitude
+            };
+
+            favorites.create(attrs, {
+              success: function() { flash.success('You created a new favorite!'); },
+              error: function() { flash.failure('Something bad happened while creating a new favorite!'); },
+              wait: true
+            });
+          },
+
+          error: function() {
+            flash.failure("Couldn't find geocode for that address. Try another!");
+          }
         });
 
         $('#add-favorite').button('reset');
@@ -79,7 +99,7 @@ if (typeof(uber.favorites) == 'undefined') {
       });
 
       var Favorite = Backbone.Model.extend();
-      var FavoriteCollection = Backbone.Collection.extend({ model: Favorite, url: this.endpoint });
+      var FavoriteCollection = Backbone.Collection.extend({ model: Favorite, url: uber.favorites.ENDPOINT });
 
       window.favorites = new FavoriteCollection();
       window.flash = new Flash();
@@ -148,17 +168,31 @@ if (typeof(uber.favorites) == 'undefined') {
         },
 
         onApplyEditFavoriteClick: function() {
-          var attrs = {
-            name: this.$el.find('input[name=edit-favorite-name]').val(),
-            address: this.$el.find('input[name=edit-favorite-address]').val()
-          }
+          var _self = this;
 
-          this.model.save(attrs, {
-            success: function() { flash.success('You updated a favorite!'); },
-            error: function() { flash.failure('Something went wrong when updating that favorite!'); },
+          var address = $('input[name=edit-favorite-address]').val();
+
+          uber.favorites.map.fetchGeocode(address, {
+            success: function(latitude, longtitude) {
+              var attrs = {
+                name: $('input[name=edit-favorite-name]').val(),
+                address: $('input[name=edit-favorite-address]').val(),
+                latitude: latitude,
+                longitude: longtitude
+              };
+
+              _self.model.save(attrs, {
+                success: function() { flash.success('You updated a favorite!'); },
+                error: function() { flash.failure('Something went wrong when updating that favorite!'); },
+              });
+
+              uber.favorites.revertEditFields();
+            },
+
+            error: function() {
+              flash.failure("Couldn't find geocode for that address. Try another!");
+            }
           });
-
-          this.revertEditFields();
         },
 
         onCancelEditFavoriteClick: function() {
@@ -225,15 +259,15 @@ if (typeof(uber.favorites) == 'undefined') {
 
           var view = new FavoriteView({ model: favorite });
 
-          _self.favoritesListElement().append(view.render().el);
-          _self.favoritesViewElement().show();
-          _self.noFavoritesElement().hide();
+          _self.$favoritesListElement.append(view.render().el);
+          _self.$favoritesViewElement.show();
+          _self.$noFavoritesElement.hide();
           _self.clearAddFavoriteFields();
         },
 
         onFavoriteDestroyed: function(favorite) {
           if (favorites.length === 0) {
-            _self.noFavoritesElement().show();
+            _self.$noFavoritesElement.show();
           }
         }
       });

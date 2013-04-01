@@ -23,11 +23,13 @@ class UberFavoritos < Sinatra::Application
   post '/favorites' do
     name = validate_name
     address = validate_address
+    latitude = validate_latitude
+    longitude = validate_longitude
 
     favorite = nil
 
     begin
-      favorite = Favorite.create(:name => name, :address => address)
+      favorite = Favorite.create(:name => name, :address => address, :latitude => latitude, :longitude => longitude)
     rescue => ex
       logger.error "An error occurred while trying to create a favorite, error=#{ex.message} name='#{name}' address='#{address}'"
 
@@ -40,10 +42,12 @@ class UberFavoritos < Sinatra::Application
   put '/favorites/:id' do
     name = validate_name
     address = validate_address
+    latitude = validate_latitude
+    longitude = validate_longitude
     favorite = validate_favorite
 
     begin
-      favorite.update(:name => name, :address => address)
+      favorite.update(:name => name, :address => address, :latitude => latitude, :longitude => longitude)
     rescue => ex
       logger.error "An error occurred while trying to update a favorite, error='#{ex.message}' id=#{favorite.id} name='#{name}' address='#{address}'"
 
@@ -67,6 +71,14 @@ class UberFavoritos < Sinatra::Application
     params[:id].to_i
   end
 
+  def latitude_param
+    body_params['latitude']
+  end
+
+  def longitude_param
+    body_params['longitude']
+  end
+
   def name_param
     body_params['name']
   end
@@ -80,6 +92,18 @@ class UberFavoritos < Sinatra::Application
   def validate_favorite
     Favorite[id_param].tap do |favorite|
       raise Errors::NotFound if favorite.nil?
+    end
+  end
+
+  def validate_latitude
+    latitude_param.tap do |latitude|
+      raise Errors::InvalidParameters if latitude.nil?
+    end
+  end
+
+  def validate_longitude
+    longitude_param.tap do |longitude|
+      raise Errors::InvalidParameters if longitude.nil?
     end
   end
 

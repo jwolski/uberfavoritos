@@ -9,7 +9,7 @@
     <script type='text/javascript' src='javascripts/backbone-min.js'></script>
     <script type='text/javascript' src='javascripts/bootstrap.min.js'></script>
     <script type='text/javascript' src='javascripts/favorites.js'></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCULfzmoUD9BWDUZ41mvSs7w9Gq3ojRJco&sensor=false"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCULfzmoUD9BWDUZ41mvSs7w9Gq3ojRJco&sensor=true"></script>
     <script type='text/javascript' src='javascripts/favorites.map.js'></script>
     <script type='text/javascript'>
       $(function() {
@@ -28,21 +28,21 @@
       <div class='row-fluid' id='flash-view'></div>
       <div class='row-fluid'>
         <div class='span4'>
-          <div class='row-fluid' style='border-bottom:1px solid #CCC;border-top:1px solid #CCC'>
-            <h4>Your Favorites</h4>
-            <label id='no-favorites'>You have no favorites #sadface. Add some below!</label>
-            <div id='favorites-view'>
-              <ul id='favorites-list'></ul>
-            </div>
-          </div>
           <div class='row-fluid' style='border-bottom:1px solid #CCC;padding-bottom:10px;'>
             <h4>Add Your Own Favorite</h4>
             <div id='add-favorite-view'>
-              <input type='text' name='favorite-name' placeholder='Name' />
+              <input type='text' name='favorite-name' style='width:350px' placeholder='Name' />
               <input type='text' name='favorite-address' style='width:350px' placeholder='Address' /><br />
               <button class='btn btn-success' id='add-favorite'>
                 <i class='icon-plus-sign icon-white'> </i>
               </button>
+            </div>
+          </div>
+          <div class='row-fluid' style='border-bottom:1px solid #CCC;'>
+            <h4>Your Favorites</h4>
+            <label id='no-favorites'>You have no favorites #sadface. Add some, won't you?!</label>
+            <div id='favorites-view'>
+              <ul id='favorites-list'></ul>
             </div>
           </div>
         </div>
