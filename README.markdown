@@ -1,7 +1,7 @@
 uberfavoritos!
 ====
 
-This is a small little web app that allows you to manage your favorite locations. Add, delete, edit and locate your favorites on a map.
+This is a small little web app that allows you to manage your favorite locations - add, delete, edit and locate your favorites on a map. Please see the exercise in all of its glory at http://uberfavoritos.herokuapp.com!
 
 Usage (Functionality):
 ----
@@ -56,8 +56,10 @@ Frontend tech:
 
 Assumptions made:
 ----
-1. Single user system
-2. Integer based migrations instead of timestamp
-3. Denormalized storage of favorites
-4. Did not use Sprockets for asset pipelining
-5. Some functional tests rely on DB
+1. Single user system. I introduced a User model with the association built between User and Favorite, but am currently not building the assocation upon creation of any favorites.
+2. Integer based migrations. I used these instead of timestamp migrations since I'm only a single dev and it's more readable.
+3. Denormalized storage of favorites. I toyed with abstracting a Location out from Favorite and have a Favorite be a simple mapping between a User and a Location, but decided to keep it simple for this exercise.
+4. Did not use Sprockets for asset pipelining. I left this for a future exercise and felt it was unnecessary for the exercise.
+5. Some functional tests rely on DB. I'd rather eliminate as many external dependencies that I can from my tests, but these functional tests are built to rely on models being placed in the DB.
+
+If you've made it this far, thanks for reading. I hope you enjoy.
