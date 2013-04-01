@@ -66,7 +66,7 @@ if (typeof(uber.favorites) == 'undefined') {
             };
 
             favorites.create(attrs, {
-              success: function() { flash.success('You created a new favorite!'); },
+              success: function() { flash.success('Welcome a new favorite into the world!'); },
               error: function() { flash.failure('Hey, did you forget a param??!?'); },
               wait: true
             });
@@ -185,8 +185,8 @@ if (typeof(uber.favorites) == 'undefined') {
               };
 
               _self.model.save(attrs, {
-                success: function() { flash.success('You updated a favorite!'); },
-                error: function() { flash.failure('Something went wrong when updating that favorite!'); },
+                success: function() { flash.success('That old info was no good anyway!! :DD!'); },
+                error: function() { flash.failure('Did you forget some required info?'); },
               });
 
               uber.favorites.map.replaceMarker(oldName, name, latitude, longitude);
@@ -205,7 +205,7 @@ if (typeof(uber.favorites) == 'undefined') {
 
         onDeleteFavoriteClick: function() {
           this.model.destroy({
-            success: function() { flash.success(':(( So sad to see that favorite go!'); },
+            success: function() { flash.success("Though, it's so sad to see that favorite go! :((("); },
             error: function() { flash.failure('Something went wrong when deleting that favorite!'); },
             wait: true
           });
