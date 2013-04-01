@@ -38,6 +38,8 @@ if (typeof(uber.favorites.map) == 'undefined') {
       });
 
       _self.markers.push(marker);
+
+      map.setCenter(latLng);
     },
 
     fetchGeocode: function(address, options) {
