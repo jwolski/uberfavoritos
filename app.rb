@@ -3,13 +3,14 @@ require 'sinatra/json'
 require 'sinatra/reloader'
 
 require_relative 'config/init'
-require_relative 'models/init'
-require_relative 'routes/init'
+require_relative 'app/models/init'
+require_relative 'app/routes/init'
 
 class UberFavoritos < Sinatra::Application
   helpers Sinatra::JSON
 
   set :json_encoder, :to_json
+  set :views, Proc.new { File.join(root, 'app/views') }
 
   configure :development do
     register Sinatra::Reloader
