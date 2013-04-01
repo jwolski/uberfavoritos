@@ -8,6 +8,8 @@ if (typeof(uber.favorites.map) == 'undefined') {
   uber.favorites.map = {
     GEOCODE_ENDPOINT: 'http://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=',
 
+    markers: [],
+
     init: function() {
       var mapOptions = {
         center: new google.maps.LatLng(37.775, -122.4183),
@@ -16,7 +18,22 @@ if (typeof(uber.favorites.map) == 'undefined') {
         zoomControl: true
       };
 
-      var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      window.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    },
+
+    addMarker: function(name, latitude, longitude) {
+      var _self = uber.favorites.map;
+
+      var latLng = new google.maps.LatLng(latitude, longitude);
+
+      var marker = new google.maps.Marker({
+          animation: google.maps.Animation.DROP,
+          position: latLng,
+          map: map,
+          title: name
+      });
+
+      _self.markers.push(marker);
     },
 
     fetchGeocode: function(address, options) {
@@ -34,6 +51,16 @@ if (typeof(uber.favorites.map) == 'undefined') {
           var longitude = data['results'][0]['geometry']['location']['lng'];
 
           options['success'](latitude, longitude);
+        }
+      });
+    },
+
+    removeMarker: function(name) {
+      var _self = uber.favorites.map;
+
+      _.each(_self.markers, function(marker) {
+        if (marker.getTitle() === name) {
+          marker.setMap(null);
         }
       });
     }

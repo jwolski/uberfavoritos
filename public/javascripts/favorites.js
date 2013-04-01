@@ -263,12 +263,19 @@ if (typeof(uber.favorites) == 'undefined') {
           _self.$favoritesViewElement.show();
           _self.$noFavoritesElement.hide();
           _self.clearAddFavoriteFields();
+
+          uber.favorites.map.addMarker(
+            favorite.get('name'),
+            favorite.get('latitude'),
+            favorite.get('longitude'));
         },
 
         onFavoriteDestroyed: function(favorite) {
           if (favorites.length === 0) {
             _self.$noFavoritesElement.show();
           }
+
+          uber.favorites.map.removeMarker(favorite.get('name'));
         }
       });
 
