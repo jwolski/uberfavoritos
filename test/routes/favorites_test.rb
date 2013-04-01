@@ -18,8 +18,8 @@ class FavoritesTest < Test::Unit::TestCase
 
     assert @browser.last_response.ok?
     assert_equal 1, response_body.length
-    assert_equal favorite.name, result.name
-    assert_equal favorite.address, result.address
+    assert_equal favorite.name, result['name']
+    assert_equal favorite.address, result['address']
   end
 
   def test_delete_favorite
@@ -121,7 +121,7 @@ class FavoritesTest < Test::Unit::TestCase
   end
 
   def data(name = 'Name', address = 'Address')
-    { :name => name, :address => address }.to_json
+    { :name => name, :address => address, :latitude => 0.1, :longitude => 0.2 }.to_json
   end
 
   def invalid_address

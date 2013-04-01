@@ -1,3 +1,17 @@
+Hello and welcome to uberfavoritos!
+
+This is a small little web app that allows you to add favorite locations!
+
+Tech involved:
+- Rack
+- Sinatra
+- Sequel
+- Postgres
+- Backbone.js
+- Underscore.js
+- Google Maps API
+- (Twitter) Bootstrap)
+
 Assumptions:
 1) Single user with no user authentication/authorization
 
@@ -17,25 +31,3 @@ Went with normalization of data to display abstraction of concepts
 
 6) Would have chosen to go with sprockets or similar for my assets
 7) Tests that rely on DB
-
-TODO:
-DONE 1) Get database config into config file
-DONE 2) Create local postgres database
-DONE 3) Define database migration for favorites table (Sequel)
-DONE 4) Create rake task that runs migrations in heroku
-DONE 5) Create Sequel model for Favorite
-6) Add to favorites endpoint GET and POST
-7) See if there's a better way to do idiomatic Sinatra database config (e.g. database.yml... Look at how ideeli did it with DAM)
-8) 404 pages
-9) Get connection string out of database.rb and put into maybe database.yml for Rakefile to share
-10) correct doctype header for haml in views
-11) make sure it works cross-browser
-12) split views into partials
-13) handle errors from endpoint
-14) paginate
-15) return good data from endpoints
-16) auto complete
-
-Questions
-1) User management?
-2) What does 'new' do in js?
